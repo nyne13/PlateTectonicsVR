@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tectonic Plates</title>
+  <meta name="description" content="Lava, sweat and tears">
+
+  <!-- Apple -->
+  <meta name="viewport" content="width=device-width, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Web AR">
+
+  <!-- Web app fullscreen -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Web AR">
+
+  <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+  <script src="script/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+
+<a-scene>
+  <a-assets>
+    <img id="rocky" src="assets/img/rocky/Rough_rock_015_COLOR.jpg" />
+    <img id="rocky-disp" src="assets/img/rocky/Rough_rock_015_DISP.jpg" />
+    <img id="rocky-occ" src="assets/img/rocky/Rough_rock_015_OCC.jpg" />
+    <img id="rocky-nrm" src="assets/img/rocky/Rough_rock_015_NRM.jpg" />
+    <img id="img-arrow" src="assets/img/arrow/arrow-left.png" />
+    <img id="img-arrow-round" src="assets/img/arrow/arrow-round.png" />
+    <img id="img-spark" src="assets/img/spark.png" />
+    <img id="img-spark2" src="assets/img/spark2.png" />
+    <img id="img-smoke" src="assets/img/smoke.png" />
+    <a-asset-item id="model-cloud" src="assets/model/cloud/scene.gltf"></a-asset-item>
+    <a-asset-item id="model-mountains" src="assets/model/mountain/scene.gltf"></a-asset-item>
+  </a-assets>
+
+  <!-- Sky -->
+  <a-sky color="#9cdcfc" ></a-sky>
+
+  <!-- Gaze control -->
+  <a-entity position="0 0.6 4">
+    <a-entity camera look-controls wasd-controls id="camera">
+      <a-text id="text1" value= "Click till no arrows!" color="#111" position="0 -0.5 -3" align="center" visible="false" scale="1 1" ></a-text>
+      <a-text id="text2" value= "Click till no arrows!" color="#111" position="0 -0.5 -3" align="center" visible="false" scale="1 1" ></a-text>
+      <a-entity id="cursor" position="0 0 -3" geometry="primitive: ring; radiusInner: 0.05; radiusOuter: 0.085;" material="color: white; shader: flat" cursor="maxDistance: 20; fuse: false">
+        <a-animation begin="click" easing="ease-in" attribute="scale"
+        fill="backwards" from="1 1 1" to="0.2 0.2 0.2" dur="150" ></a-animation>
+        <!--<a-animation begin="endclick" easing="ease-in" attribute="scale"
+        fill="forwards" from="0.2 0.2 0.2" to="1 1 1" dur="150"></a-animation>
+        <a-animation begin="fusing" easing="ease-in" attribute="scale"
+        fill="backwards" from="1 1 1" to="0.2 0.2 0.2" dur="1000"></a-animation>-->
+      </a-entity>
+    </a-entity>
+  </a-entity>
+
+  <!-- Cloud -->
+  <a-gltf-model src="#model-cloud" position="0 12 -2" scale="0.1.1 0.1.1 0.1.1"></a-gltf-model>
+  <a-gltf-model src="#model-cloud" position="-10 12 -4" scale="0.1 0.1 0.1"></a-gltf-model>
+  <a-gltf-model src="#model-cloud" position="6 12 -6" scale="0.07 0.07 0.07"></a-gltf-model>
+
+   <a-light type="ambient" color="#ccc"></a-light>
+  <a-light color="#ddf" distance="100" intensity="0.4" type="point"></a-light>
+
+  <!---
+  <a-entity id="landing">
+  <a-entity id="egypt" environment="preset: egypt; dressingAmount:20; skyType:color; skyColor:#AADDF0"></a-entity>
+    <a-ocean width="1000" depth="1000" density="50" opacity="0.8" position="0 1.5 0" rotate="0 0 270"></a-ocean>
+  </a-entity>-->
+
+ <a-entity id="landing" position="0 -1 0">
+
+   <a-text value="Click on either blinking" color="#FF1D8E" position="-0.8 4.8 0" ></a-text>
+   <a-text value="arrow to start your journey!" color="#FF1D8E" position="-1 4.5 0" ></a-text>
+
+   <a-entity>
+     <a-image id="button1" crossorigin="anonymous" src="#img-arrow" position="-2 3 0" rotation="0 0 90" ></a-image>
+      <a-animation attribute="visible" direction="alternate" from="true" to="false" dur="300" delay="100" repeat="indefinite"></a-animation>
+   </a-entity>
+
+   <a-entity>
+  <a-image id="button2" crossorigin="anonymous" src="#img-arrow" position="2 3 0" rotation="0 0 90" ></a-image>
+ <a-animation attribute="visible" direction="alternate" from="true" to="false" dur="300" delay="100" repeat="indefinite"></a-animation>
+ </a-entity>
+
+  <a-ocean width="1000" depth="1000" density="200" opacity="0.8" position="0 1.5 0" rotate="0 0 270"></a-ocean>
+   <!--<a-cone color="tomato" radius-bottom="2" radius-top="0" position="8 3 -4" height="5"></a-cone>
+   <a-cone color="tomato" radius-bottom="1.5" radius-top="0" position="3 1.5 -2" height="1.5"></a-cone>-->
+   <a-gltf-model src="#model-mountains" position="4 1.5 -4" scale="0.15 0.15 0.15" rotation="0 300 0"></a-gltf-model>
+
+   <a-entity id="landing1">
+   <a-image id="smoke" crossorigin="anonymous" src="#img-smoke" position="-2 0 0"></a-image>
+     <a-animation attribute="position" from="0 0 0" to="0 2 0" dur="4000" repeat="indefinite"></a-animation>
+   </a-entity>
+
+   <a-entity id="landing2">
+   <a-image id="smoke2" crossorigin="anonymous" src="#img-smoke" position="-2 0 0"></a-image>
+     <a-animation attribute="position" from="0 0 0" to="0 1.4 0" dur="4000" repeat="indefinite"></a-animation>
+   </a-entity>
+
+    <a-entity id="landing3">
+   <a-image id="smoke3" crossorigin="anonymous" src="#img-smoke" position="-2 0 0"></a-image>
+      <a-animation attribute="position" from="0 0 0" to="0 2.6 0" dur="4000" repeat="indefinite"></a-animation>
+   </a-entity>
+
+   <a-entity id="landing4">
+   <a-image id="smoke4" crossorigin="anonymous" src="#img-smoke" position="-2.3 0 0"></a-image>
+     <a-animation attribute="position" from="-0.1 0 0" to="0 2.4 0" dur="4000" delay="10" repeat="indefinite"></a-animation>
+   </a-entity>
+
+     <a-entity id="landing5">
+   <a-image id="smoke5" crossorigin="anonymous" src="#img-smoke" position="-2.3 0 0"></a-image>
+     <a-animation attribute="position" from="-1.1 0 0" to="0 2.5 0" dur="6000" delay="100" repeat="indefinite"></a-animation>
+   </a-entity>
+
+    <a-entity id="landing6">
+   <a-image id="smoke6" crossorigin="anonymous" src="#img-smoke" position="-2.3 0 0"></a-image>
+     <a-animation attribute="position" from="-1.1 0 0" to="0 2 0" dur="6000" delay="100" repeat="indefinite"></a-animation>
+   </a-entity>
+
+</a-entity>
+
+<!--************************ SCENE 1 *************************-->
+
+<a-entity id="scene1" visible="false" position ="0 5 0">
+
+  <a-entity id="button3" geometry="primitive: plane; width:1; height:0.5" material="color: #ffffff" position="0 0.5 -2">
+    <a-animation attribute="visible" begin="starthome" direction="alternate" from="true" to="false" dur="100" delay="100" repeat="indefinite" end="stophome"></a-animation>
+ </a-entity>
+
+  <a-text id="home1" value="Home" color="#FF1D8E" position="-0.3 0.5 -2" ></a-text>
+
+  <!-- Lighting -->
+
+    <!-- Ocean-->
+    <a-ocean width="110" depth="50" density="20" opacity="1" position="0 -3 -45" rotate="0 0 270"></a-ocean>
+    <a-box scale="110 6 50" color="#78cef9" position="0 -6 -45"></a-box>
+
+    <!-- Lava Body -->
+    <a-box scale="110 150 50" color="#ff6600" repeat="2 2" position="0 -84 -45"></a-box>
+
+    <!-- Moving Lava width=110 -->
+    <a-ocean width="71" height="100" depth="1" density="50" opacity="1" position="0 -8 -12" rotate="0 -270 0" color="#cf1020" visible="true"></a-ocean>
+    <a-ocean width="71" height="100" depth="1" density="50" opacity="0.75" position="0 -8 -12" rotate="0 -270 0" color="#ffcc00" visible="true"></a-ocean>
+    <a-ocean width="71" height="100" depth="1" density="50" opacity="0.5" position="0 -8 -12" rotate="0 -270 0" color="#ff6600" visible="true"></a-ocean>
+
+    <a-ocean width="71" height="100" depth="1" density="75" opacity="1" position="0 -5.9 -12" rotate="0 -270 0" color="#cf1020" visible="true"></a-ocean>
+    <a-ocean width="71" height="100" depth="1" density="75" opacity="0.75" position="0 -5.9 -12" rotate="0 -270 0" color="#ffcc00" visible="true"></a-ocean>
+    <a-ocean width="71" height="100" depth="1" density="75" opacity="0.5" position="0 -5.9 -12" rotate="0 -270 0" color="#ff6600" visible="true"></a-ocean>
+
+    <a-ocean width="71" height="100" depth="1" density="50" opacity="1" position="0 -7 -12" rotate="0 -270 0" color="#cf1020" visible="true"></a-ocean>
+    <a-ocean width="71" height="100" depth="1" density="50" opacity="0.75" position="0 -7 -12" rotate="0 -270 0" color="#ffcc00" visible="true"></a-ocean>
+    <a-ocean width="71" height="100" depth="1" density="50" opacity="0.5" position="0 -7 -12" rotate="0 -270 0" color="#ff6600" visible="true"></a-ocean>
+
+    <!-- Brown Plates -->
+    <a-entity id="plane" geometry="primitive: plane;  width: 35; height: 2" position="-17.5 -3.9 -12" material="src: #rocky; displacement-map: #rocky-disp; ambient-occlusion-map: #rocky-occ; repeat: 9 1; normal-map: #rocky-nrm"></a-entity>
+    <a-entity id="plane3" geometry="primitive: plane;  width: 35; height: 2" position="17.5 -3.9 -12" material="src: #rocky; displacement-map: #rocky-disp; ambient-occlusion-map: #rocky-occ; repeat: 9 1; normal-map: #rocky-nrm"></a-entity>
+
+    <!-- New Land -->
+     <a-entity id="newland" geometry="primitive: plane;  width: 10; height: 2" position="0 -3.9 -12" material="src: #rocky; displacement-map: #rocky-disp; ambient-occlusion-map: #rocky-occ; repeat: 1 1; normal-map: #rocky-nrm" visible="false" >
+       <a-animation attribute="visible" delay="2000" begin="newlandmove" to="true"></a-animation>
+    </a-entity>
+
+    <!-- Swirling Arrow left -->
+    <a-entity>
+      <a-image id="anticlock" crossorigin="anonymous" src="#img-arrow-round" position="-4 -5.5 -9" opacity="1" scale="2.5 2.5"></a-image>
+      <a-animation attribute="visible" direction="alternate" from="true" to="false" dur="100" delay="100" repeat="indefinite" end="stopanticlock"></a-animation>
+      <a-animation attribute="visible" begin="test1" direction="alternate" from="true" to="false" dur="100" delay="100" repeat="indefinite" end="againstopanticlock"></a-animation>
+      <a-animation attribute="visible" dur="6000" begin="moveanticlock" to="false"></a-animation>
+      <a-animation attribute="visible" begin="visibleanticlock" to="true" end="notvisibleanticlock"></a-animation>
+    </a-entity>
+
+    <!-- Swirling Arrow right -->
+    <a-entity>
+      <a-image id="clock" crossorigin="anonymous" src="#img-arrow-round" position="4 -5.5 -9" rotation="0 180 0" scale="2.5 2.5"></a-image>
+      <a-animation attribute="visible" direction="alternate" from="true" to="false" dur="100" delay="100" repeat="indefinite" end="stopclock"></a-animation>
+      <a-animation attribute="visible" begin="test2" direction="alternate" from="true" to="false" dur="100" delay="100" repeat="indefinite" end="againstopclock"></a-animation>
+      <a-animation attribute="visible" dur="6000" begin="moveclock" to="false"></a-animation>
+      <a-animation attribute="visible" begin="visibleclock" to="true" end="notvisibleclock"></a-animation>
+    </a-entity>
+
+
+  <a-image id="spark1" crossorigin="anonymous" src="#img-spark" position="0 -4.5 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark1" direction="alternate" from="0 -4.5 -10" to="0 -0.8 -10" dur="1000" repeat="indefinite" end="stopspark1"></a-animation></a-image>
+  <a-image id="spark2" crossorigin="anonymous" src="#img-spark" position="-0.5 -4.5 -8" width="1.5" height="1.5" visible="false">
+     <a-animation attribute="position" begin="startspark2" delay="100" direction="alternate" from="-0.5 -4.5 -10" to="0 -0.8 -10" dur="1000" repeat="indefinite" end="stopspark2"></a-animation></a-image>
+  <a-image id="spark3" crossorigin="anonymous" src="#img-spark2" position="0.5 -4.5 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark3" delay="200" direction="alternate" from="0.5 -4.5 -10" to="0.5 -0.8 -10" dur="1000" repeat="indefinite" end="stopspark3"></a-animation></a-image>
+  <a-image id="spark4" crossorigin="anonymous" src="#img-spark" position="-1 -4.5 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark4" direction="alternate" from="-1 -4.5 -9" to="-1 -0.9 -9" dur="1000" repeat="indefinite" end="stopspark4"></a-animation></a-image>
+  <a-image id="spark5" crossorigin="anonymous" src="#img-spark2" position="1 -4.5 -8" width="1.5" height="1.5" visible="false">
+     <a-animation attribute="position" begin="startspark5" delay="300" direction="alternate" from="1 -4.5 -10" to="1 -0.9 -10" dur="1000" repeat="indefinite" end="stopspark5"></a-animation></a-image>
+  <a-image id="spark6" crossorigin="anonymous" src="#img-spark" position="-1.5 -4.5 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark6" delay="300" direction="alternate" from="-1.5 -4.5 -10" to="-1.5 -0.9 -10" dur="1000" repeat="indefinite" end="stopspark6"></a-animation></a-image>
+ <a-image id="spark7" crossorigin="anonymous" src="#img-spark2" position="1.5 -4.5 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark7" direction="alternate" from="1.5 -4.5 -10" to="1.5 -1 -10" dur="1000" repeat="indefinite" end="stopspark7"></a-animation> </a-image>
+  <a-image id="spark8" crossorigin="anonymous" src="#img-spark" position="2 -4 -8" width="1.5" height="1.5" visible="false">
+     <a-animation attribute="position" begin="startspark8" delay="500" direction="alternate" from="2 -4 -10" to="2 -1 -10" dur="1000" repeat="indefinite" end="stopspark8"></a-animation></a-image>
+  <a-image id="spark9" crossorigin="anonymous" src="#img-spark2" position="-2 -3.5 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark9" delay="100" direction="alternate" from="-2 -3.5 -10" to="-2 -1 -10" dur="1000" repeat="indefinite" end="stopspark9"></a-animation></a-image>
+
+
+    <!--- Small Red Lava -->
+  <a-entity id="riselava">
+      <a-ocean width="5" height="50" depth="2" density="10" position="0 -6.5 -12.3" rotate="-180 0 0" color="#cf1020" opacity="1"></a-ocean>
+      <a-ocean width="5" height="50" depth="2" density="10" position="0 -6.5 -12.3" rotate="-180 0 0" color="#ffcc00" opacity="0.75"></a-ocean>
+      <a-ocean width="5" height="50" depth="2" density="10" position="0 -6.5 -12.3" rotate="-180 0 0" color="#ff6600" opacity="0.5"></a-ocean>
+      <a-ocean width="5" height="50" depth="2" density="10" position="0 -6 -12.3" rotate="-180 0 0" color="#cf1020" opacity="1"></a-ocean>
+      <a-ocean width="5" height="50" depth="2" density="10" position="0 -6 -12.3" rotate="-180 0 0" color="#ffcc00" opacity="0.75"></a-ocean>
+      <a-ocean width="5" height="50" depth="2" density="10" position="0 -6 -12.3" rotate="-180 0 0" color="#ff6600" opacity="0.5"></a-ocean>
+      <a-ocean width="5" height="50" depth="2" density="10" position="0 -5.5 -12.3" rotate="-180 0 0" color="#cf1020" opacity="1"></a-ocean>
+      <a-ocean width="5" height="50" depth="2" density="10" position="0 -5.5 -12.3" rotate="-180 0 0" color="#ffcc00" opacity="0.75"></a-ocean>
+      <a-ocean width="5" height="50" depth="2" density="10" position="0 -5.5 -12.3" rotate="-180 0 0" color="#ff6600" opacity="0.5"></a-ocean>
+  </a-entity>
+
+    <!--- Small Brown Lava -->
+  <a-entity id= "smallbrown">
+  <a-ocean width="5" height="20" depth="2" density="10" position="0 -6 -12.5" rotate="-180 0 0" color="#595050" ></a-ocean>
+  <a-ocean width="5" height="20" depth="2" density="10" position="0 -5.5 -12.5" rotate="-180 0 0" color="#595050"></a-ocean>
+  <a-ocean width="5" height="20" depth="2" density="10" position="0 -6.5 -12.5" rotate="-180 0 0" color="#595050"></a-ocean>
+  </a-entity>
+
+      <!--<a-ocean width="5" height="20" depth="2" density="20" position="0 -1.5 -5" rotate="-180 0 0" color="#595050" opacity="1">
+      </a-ocean>-->
+
+        </a-entity>
+
+<!--************************ SCENE 2 *************************-->
+    <!--Primitives for scene 2 -->
+
+  <a-entity id="scene2" visible="false">
+
+    <a-entity id="button4" geometry="primitive: plane; width:1; height:0.5" material="color: #ffffff" position="0 3 0.5">
+    <a-animation attribute="visible" begin="starthome1" direction="alternate" from="true" to="false" dur="100" delay="100" repeat="indefinite" end="stophome1"></a-animation>
+ </a-entity>
+
+    <a-text value="Home" color="#FF1D8E" position="-0.3 3 0.5" ></a-text>
+
+    <!-- Ocean-->
+    <a-ocean width="110" depth="60" density="20" opacity="1" position="0 -2 -45" rotate="0 0 0"></a-ocean>
+    <a-box scale="110 7.5 60" color="#78cef9" position="0 -6 -45"></a-box>
+
+      <!-- Lava Body -->
+    <a-box scale="110 150 60" color="#ff6600" repeat="2 2" position="0 -84.5 -45"></a-box>
+
+    <!--<a-text id="text2" value= "Click on the arrows below! " color="#111" position="-0.6 2 2.5" rotate="0 0 180" visible="false" scale="0.5 0.5"></a-text>-->
+
+   <!-- <a-entity id="spark" position="-0.8 -1.2 10" particle-system="color: #EF0000; rotationAxis:y; velocityValue:0 0 40" rotation="" scale="" visible="false">
+      <a-animation attribute="visible" dur="2000" begin="sparkappear" to="true"></a-animation>
+    </a-entity>-->
+
+  <a-entity id="rightarrow" geometry="primitive: box; width: 3; height: 1.2" position="6 -4 -7" material="transparent: true; opacity: 0">
+    <a-image id="rightarrowimg" crossorigin="anonymous" src="#img-arrow"  rotation="0 0 0"></a-image>
+    <a-animation attribute="visible" direction="alternate" from="true" to="false" dur="100" delay="100" repeat="indefinite" end="stopright"></a-animation>
+    <a-animation attribute="visible" begin="startright2" direction="alternate" from="true" to="false" dur="100" delay="100" repeat="indefinite" end="stopright2"></a-animation>
+    <a-animation attribute="visible" begin="startright" to="true" end="stopright1"></a-animation>
+    <a-animation attribute="visible" begin="startright3" to="false"></a-animation>
+  </a-entity>
+
+  <a-entity id="leftarrow" geometry="primitive: box; width: 3; height: 1.2" position="-6 -4.2 -7.5" material="transparent: true; opacity: 0">
+      <a-image id="leftarrowimg" crossorigin="anonymous" src="#img-arrow"  rotation="0 -180 0"></a-image>
+      <a-animation attribute="visible" direction="alternate" from="true" to="false" dur="100" delay="100" repeat="indefinite" end="stopleft"></a-animation>
+      <a-animation attribute="visible" begin="startleft2" direction="alternate" from="true" to="false" dur="100" delay="100" repeat="indefinite" end="stopleft2"></a-animation>
+      <a-animation attribute="visible" begin="startleft" to="true" end="stopleft1"></a-animation>
+      <a-animation attribute="visible" begin="startleft3" to="false"></a-animation>
+  </a-entity>
+
+    <!--<a-entity gltf-model="#mountain4" position="-1 0 -15" rotation="0 0 0">
+      <a-animation attribute="opacity" delay="2000" dur="10000" begin="mountain1move" to="1"></a-animation>
+    </a-entity>-->
+    <a-entity id="mountain1" gltf-model="#model-mountains" position="0 -12 -40" scale="0.4 0.4 0.4" rotation="0 300 0">
+      <a-animation attribute="position" delay="2000" dur="10000" begin="mountain1move" to="0 -4 -40"></a-animation>
+    </a-entity>
+
+    <!--Ocean bed plates-->
+    <!---brown layer-->
+    <a-entity id="plane11" geometry="primitive: plane;  width: 70; height: 1" position="0 -3.5 -9" rotation="0 0 0" material="src: #rocky; displacement-map: #rocky-disp; ambient-occlusion-map: #rocky-occ; repeat: 20 1; normal-map: #rocky-nrm; roughness: 1"></a-entity>
+    <!---light blue-->
+    <a-entity id="plane13" geometry="primitive: plane;  width: 22; height: 1.2" position="-13.3 -4.5 -8.01" rotation="0 0 0" material="color: #0080ff"></a-entity>
+    <!---dark blue-->
+    <a-entity id="plane12" geometry="primitive: plane;  width: 22; height: 1.2" position="13.5 -4.5 -8" rotation="0 0 0" material="color: #00407f" opacity="1" visible="true"></a-entity>
+    <a-entity id="fold" geometry="primitive: plane;  width: 0.6; height: 1.2" position="2.5 -4.65 -8" rotation="0 0 35" material="color: #00407f"  visible="false" ></a-entity>
+
+    <a-entity>
+      <a-ocean width="84" height="100" depth="1" density="100" opacity="1" position="-0.8 -6.5 -10" rotate="0 -270 0" color="#cf1020" visible="true"></a-ocean>
+      <a-ocean width="84" height="100" depth="1" density="100" opacity="0.75" position="-0.8 -6.5 -10" rotate="0 -270 0" color="#ffcc00" visible="true"></a-ocean>
+      <a-ocean width="84" height="100" depth="1" density="100" opacity="0.5" position="-0.8 -6.5 -10" rotate="0 -270 0" color="#ff6600" visible="true"></a-ocean>
+
+      <a-ocean width="84" height="100" depth="1" density="50" opacity="1" position="-0.8 -7.5 -10" rotate="0 -270 0" color="#cf1020" visible="true"></a-ocean>
+      <a-ocean width="84" height="100" depth="1" density="50" opacity="0.75" position="-0.8 -7.5 -10" rotate="0 -270 0" color="#ffcc00" visible="true"></a-ocean>
+      <a-ocean width="84" height="100" depth="1" density="50" opacity="0.5" position="-0.8 -7.5 -10" rotate="0 -270 0" color="#ff6600" visible="true"></a-ocean>
+
+      <a-ocean width="84" height="100" depth="1" density="50" opacity="1" position="-0.8 -8.5 -10" rotate="0 -270 0" color="#cf1020" visible="true"></a-ocean>
+      <a-ocean width="84" height="100" depth="1" density="50" opacity="0.75" position="-0.8 -8.5 -10" rotate="0 -270 0" color="#ffcc00" visible="true"></a-ocean>
+      <a-ocean width="84" height="100" depth="1" density="50" opacity="0.5" position="-0.8 -8.5 -10" rotate="0 -270 0" color="#ff6600" visible="true"></a-ocean>
+    </a-entity>
+
+    <a-image id="spark10" crossorigin="anonymous" src="#img-spark" position="1 -6 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark10" direction="alternate" from="1 -6 -8" to="1 0 -8" dur="500" repeat="indefinite" end="stopspark10"></a-animation></a-image>
+  <a-image id="spark11" crossorigin="anonymous" src="#img-spark" position="1 -6 -8" width="1.5" height="1.5" visible="false">
+     <a-animation attribute="position" begin="startspark11" delay="100" direction="alternate" from="1 -6 -8" to="1 0 -8" dur="500" repeat="indefinite" end="stopspark11"></a-animation></a-image>
+  <a-image id="spark12" crossorigin="anonymous" src="#img-spark2" position="1 -6 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark12" delay="200" direction="alternate" from="1 -6 -8" to="1 1 -8" dur="1000" repeat="indefinite" end="stopspark12"></a-animation></a-image>
+  <a-image id="spark13" crossorigin="anonymous" src="#img-spark" position="0.5 -6 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark13" direction="alternate" from="0.5 -6 -8" to="0.5 0.5 -8" dur="1000" repeat="indefinite" end="stopspark13"></a-animation></a-image>
+  <a-image id="spark14" crossorigin="anonymous" src="#img-spark2" position="0.5 -6 -8" width="1.5" height="1.5" visible="false">
+     <a-animation attribute="position" begin="startspark14" delay="100" direction="alternate" from="0.5 -6 -8" to="0.5 0.5 -8" dur="1000" repeat="indefinite" end="stopspark14"></a-animation></a-image>
+  <a-image id="spark15" crossorigin="anonymous" src="#img-spark" position="0.5 -6 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark15" delay="200" direction="alternate" from="0.5 -6 -8" to="0.5 0 -8" dur="1000" repeat="indefinite" end="stopspark15"></a-animation></a-image>
+ <a-image id="spark16" crossorigin="anonymous" src="#img-spark2" position="0 -6 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark16" direction="alternate" from="0 -6 -8" to="0 1 -8" dur="1000" repeat="indefinite" end="stopspark16"></a-animation> </a-image>
+  <a-image id="spark17" crossorigin="anonymous" src="#img-spark" position="0 -6 -8" width="1.5" height="1.5" visible="false">
+     <a-animation attribute="position" begin="startspark17" delay="100" direction="alternate" from="0 -6 -8" to="0 0 -8" dur="1000" repeat="indefinite" end="stopspark17"></a-animation></a-image>
+  <a-image id="spark18" crossorigin="anonymous" src="#img-spark2" position="0 -6 -8" width="1.5" height="1.5" visible="false" >
+     <a-animation attribute="position" begin="startspark18" delay="200" direction="alternate" from="0 -6 -8" to="0 0 -8" dur="1000" repeat="indefinite" end="stopspark18"></a-animation></a-image>
+
+  </a-entity>
+</a-scene>
+
+<script>
+  var smallbrown= document.querySelector('#smallbrown');
+  var home1= document.querySelector('#home1');
+  var spark1= document.querySelector('#spark1');
+  var spark2= document.querySelector('#spark2');
+  var spark3= document.querySelector('#spark3');
+  var spark4= document.querySelector('#spark4');
+  var spark5= document.querySelector('#spark5');
+  var spark6= document.querySelector('#spark6');
+  var spark7= document.querySelector('#spark7');
+  var spark8= document.querySelector('#spark8');
+  var spark9= document.querySelector('#spark9');
+  var spark10= document.querySelector('#spark10');
+  var spark12= document.querySelector('#spark12');
+  var spark13= document.querySelector('#spark13');
+  var spark14= document.querySelector('#spark14');
+  var spark15= document.querySelector('#spark15');
+  var spark16= document.querySelector('#spark16');
+  var spark17= document.querySelector('#spark17');
+  var spark18= document.querySelector('#spark18');
+  var spark11= document.querySelector('#spark11');
+  var riselava= document.querySelector('#riselava');
+  var landing= document.querySelector('#landing');
+  var button1 = document.querySelector('#button1');
+  var button2 = document.querySelector('#button2');
+  var scene1 = document.querySelector('#scene1');
+  var scene2 = document.querySelector('#scene2');
+  var image = document.querySelector('#mountain1');
+  var plane = document.querySelector('#plane');
+  var plane3 = document.querySelector('#plane3');
+  var plane12 = document.querySelector('#plane12');
+  var plane13 = document.querySelector('#plane13');
+  var leftarrow = document.querySelector('#leftarrow');
+  var rightarrow = document.querySelector('#rightarrow');
+  var leftarrowimg = document.querySelector('#leftarrowimg');
+  var rightarrowimg = document.querySelector('#rightarrowimg');
+  var anticlock = document.querySelector('#anticlock');
+  var clock = document.querySelector('#clock');
+  var magmacount = 0;
+  var rightclick = 0;
+  var leftclick = 0;
+  var text1 = document.querySelector('#text1');
+  var text2 = document.querySelector('#text2');
+  var fold = document.querySelector('#fold');
+  var test= document.querySelector('#test');
+  var p = 0;
+  var a = 0;
+  var scaleclick = 0;
+  var leftfar = 0;
+  var mountain1 = document.querySelector('#mountain1');
+  var mountain2 = document.querySelector('#mountain2');
+  var mountain3 = document.querySelector('#mountain3');
+  var newland = document.querySelector('#newland');
+  var button3 = document.querySelector('#button3');
+  var button4 = document.querySelector('#button4');
+
+/*LANDING PAGE*/
+  if (landing.getAttribute.visible ='true'){
+  /*HOME SCREEN LEFT BUTTON*/
+    button1.addEventListener("click", function () {
+      scene1.setAttribute('visible', 'true');
+      scene2.setAttribute('visible', 'false');
+      landing.setAttribute('visible', 'false');
+    });
+
+    button1.addEventListener("mouseenter", function () {
+      button1.setAttribute('material','color', 'black');
+    });
+
+    button1.addEventListener("mouseleave", function () {
+      button1.setAttribute('material','color', 'white');
+    });
+
+      /* HOME, GO TO INT2 ARROW*/
+    button2.addEventListener("click", function () {
+      scene1.setAttribute('visible', 'false');
+      scene2.setAttribute('visible', 'true')
+      landing.setAttribute('visible', 'false');
+    });
+
+
+    button2.addEventListener("mouseenter", function () {
+      button2.setAttribute('material','color', 'black');
+    });
+
+    button2.addEventListener("mouseleave", function () {
+      button2.setAttribute('material','color', 'white');
+    });
+
+  }
+
+
+
+
+  /*INT1*/
+
+  if (scene1.getAttribute.visible ='true'){
+    /*HOME BUTTON for Int1*/
+
+    button3.addEventListener("mouseenter", function () {
+      document.querySelector('#button3').emit('stophome');
+      button3.setAttribute('material','color', 'black');
+    });
+
+    button3.addEventListener("mouseleave", function () {
+       document.querySelector('#button3').emit('starthome');
+      button3.setAttribute('material','color', 'white');
+    });
+
+      button3.addEventListener("click", function () {
+      scene1.setAttribute('visible', 'false');
+      scene2.setAttribute('visible', 'false');
+      landing.setAttribute('visible', 'true');
+    });
+
+    anticlock.addEventListener("mouseenter", function() {
+      document.querySelector('#clock').emit('stopclock');
+      document.querySelector('#anticlock').emit('stopanticlock');
+      document.querySelector('#clock').emit('againstopclock');
+      document.querySelector('#anticlock').emit('againstopanticlock');
+      document.querySelector('#anticlock').emit('visibleanticlock');
+      document.querySelector('#clock').emit('visibleclock');
+      anticlock.setAttribute('material','color', 'black');
+      clock.setAttribute('material','color', 'black');
+      text1.setAttribute('visible','true');
+
+      if(magmacount=== 10 || magmacount===11 || magmacount===12) {
+        document.querySelector('#anticlock').emit('notvisibleanticlock');
+        document.querySelector('#clock').emit('notvisibleclock');
+        document.querySelector('#clock').emit('againstopclock');
+        document.querySelector('#anticlock').emit('againstopanticlock');
+        text1.setAttribute('visible','false');
+      }
+    });
+
+    clock.addEventListener("mouseenter", function() {
+      document.querySelector('#clock').emit('stopclock');
+      document.querySelector('#anticlock').emit('stopanticlock');
+      document.querySelector('#clock').emit('againstopclock');
+      document.querySelector('#anticlock').emit('againstopanticlock');
+      document.querySelector('#anticlock').emit('visibleanticlock');
+      document.querySelector('#clock').emit('visibleclock');
+      anticlock.setAttribute('material','color', 'black');
+      clock.setAttribute('material','color', 'black');
+      text1.setAttribute('visible','true');
+
+      if(magmacount=== 10 || magmacount===11 || magmacount===12) {
+        document.querySelector('#anticlock').emit('notvisibleanticlock');
+        document.querySelector('#clock').emit('notvisibleclock');
+        document.querySelector('#clock').emit('againstopclock');
+        document.querySelector('#anticlock').emit('againstopanticlock');
+        text1.setAttribute('visible','false');
+      }
+    });
+
+    clock.addEventListener("mouseleave", function() {
+      document.querySelector('#clock').emit('stopclock');
+      document.querySelector('#anticlock').emit('stopanticlock');
+      document.querySelector('#clock').emit('test2');
+      document.querySelector('#anticlock').emit('test1');
+      document.querySelector('#anticlock').emit('notvisibleanticlock');
+      document.querySelector('#clock').emit('notvisibleclock');
+      anticlock.setAttribute('material','color','white');
+      clock.setAttribute('material','color','white');
+      text1.setAttribute('visible','false');
+
+      if(magmacount=== 10 || magmacount===11 || magmacount===12){
+        document.querySelector('#anticlock').emit('notvisibleanticlock');
+        document.querySelector('#clock').emit('notvisibleclock');
+        document.querySelector('#clock').emit('againstopclock');
+        document.querySelector('#anticlock').emit('againstopanticlock');
+      }
+    });
+
+    anticlock.addEventListener("mouseleave", function() {
+      document.querySelector('#clock').emit('stopclock');
+      document.querySelector('#anticlock').emit('stopanticlock');
+      document.querySelector('#clock').emit('test2');
+      document.querySelector('#anticlock').emit('test1');
+      document.querySelector('#anticlock').emit('notvisibleanticlock');
+      document.querySelector('#clock').emit('notvisibleclock');
+      anticlock.setAttribute('material','color','white');
+      clock.setAttribute('material','color','white');
+      text1.setAttribute('visible','false');
+
+      if(magmacount=== 10 || magmacount===11 || magmacount===12) {
+        document.querySelector('#anticlock').emit('notvisibleanticlock');
+        document.querySelector('#clock').emit('notvisibleclock');
+        document.querySelector('#clock').emit('againstopclock');
+        document.querySelector('#anticlock').emit('againstopanticlock');
+      }
+    });
+
+
+  /* ROTATE ARROWS MOUSE CLICK*/
+    clock.addEventListener("click", function () {
+      magmacount +=1;
+      if (magmacount < 10){
+        clock.object3D.rotation.z += 45;
+        anticlock.object3D.rotation.z += 45;
+        plane.object3D.position.x -=0.2;
+        plane3.object3D.position.x +=0.2;
+        riselava.object3D.position.y +=0.17;
+         smallbrown.object3D.position.y +=0.17;
+      }
+
+      if (magmacount ===1){
+        spark1.setAttribute('visible','true');
+        document.querySelector('#spark1').emit('startspark1');}
+
+      if(magmacount===2){
+        spark2.setAttribute('visible','true');
+        document.querySelector('#spark2').emit('startspark2');}
+
+      if(magmacount===3){
+        spark3.setAttribute('visible','true');
+        document.querySelector('#spark3').emit('startspark3');}
+
+      if(magmacount===4){
+        spark4.setAttribute('visible','true');
+        document.querySelector('#spark4').emit('startspark4');}
+
+      if(magmacount===5){
+        spark5.setAttribute('visible','true');
+        document.querySelector('#spark5').emit('startspark5');}
+
+      if(magmacount===6){
+        spark6.setAttribute('visible','true');
+        document.querySelector('#spark6').emit('startspark6');}
+
+      if(magmacount===7){
+        spark7.setAttribute('visible','true');
+        document.querySelector('#spark7').emit('startspark7');}
+
+      if(magmacount===8){
+        spark8.setAttribute('visible','true');
+        document.querySelector('#spark8').emit('startspark8');}
+
+      if(magmacount===9){
+        spark9.setAttribute('visible','true');
+        document.querySelector('#spark9').emit('startspark9');}
+
+      if(magmacount===10) {
+        document.querySelector('#clock').emit('moveclock');
+        document.querySelector('#anticlock').emit('moveanticlock');
+        text1.setAttribute('visible','false');
+        document.querySelector('#spark1').emit('stopspark1');
+        document.querySelector('#spark2').emit('stopspark2');
+        document.querySelector('#spark3').emit('stopspark3');
+          document.querySelector('#spark4').emit('stopspark4');
+        document.querySelector('#spark5').emit('stopspark5');
+        document.querySelector('#spark6').emit('stopspark6');
+        document.querySelector('#spark7').emit('stopspark7');
+        document.querySelector('#spark8').emit('stopspark8');
+        document.querySelector('#spark9').emit('stopspark9');
+         spark8.setAttribute('visible','false');
+         spark9.setAttribute('visible','false');
+         spark7.setAttribute('visible','false');
+         spark6.setAttribute('visible','false');
+         spark5.setAttribute('visible','false');
+         spark4.setAttribute('visible','false');
+         spark3.setAttribute('visible','false');
+         spark2.setAttribute('visible','false');
+         spark1.setAttribute('visible','false');
+          riselava.setAttribute('visible','false');
+        document.querySelector('#newland').emit('newlandmove');
+        document.querySelector('#button3').emit('starthome');
+      }
+
+    });
+
+  /* ROTATE ARROWS MOUSE CLICK*/
+    anticlock.addEventListener("click", function () {
+      magmacount +=1;
+      if (magmacount < 10){
+        clock.object3D.rotation.z += 45;
+        anticlock.object3D.rotation.z += 45;
+        plane.object3D.position.x -=0.2;
+        plane3.object3D.position.x +=0.2;
+        riselava.object3D.position.y +=0.17;
+         smallbrown.object3D.position.y +=0.17;
+      }
+
+      if (magmacount ===1){
+        spark1.setAttribute('visible','true');
+        document.querySelector('#spark1').emit('startspark1');}
+
+      if(magmacount===2){
+        spark2.setAttribute('visible','true');
+        document.querySelector('#spark2').emit('startspark2');}
+
+      if(magmacount===3){
+        spark3.setAttribute('visible','true');
+        document.querySelector('#spark3').emit('startspark3');}
+
+      if(magmacount===4){
+        spark4.setAttribute('visible','true');
+        document.querySelector('#spark4').emit('startspark4');}
+
+      if(magmacount===5){
+        spark5.setAttribute('visible','true');
+        document.querySelector('#spark5').emit('startspark5');}
+
+      if(magmacount===6){
+        spark6.setAttribute('visible','true');
+        document.querySelector('#spark6').emit('startspark6');}
+
+      if(magmacount===7){
+        spark7.setAttribute('visible','true');
+        document.querySelector('#spark7').emit('startspark7');}
+
+      if(magmacount===8){
+        spark8.setAttribute('visible','true');
+        document.querySelector('#spark8').emit('startspark8');}
+
+      if(magmacount===9){
+        spark9.setAttribute('visible','true');
+        document.querySelector('#spark9').emit('startspark9');}
+
+      if(magmacount===10) {
+        document.querySelector('#clock').emit('moveclock');
+        document.querySelector('#anticlock').emit('moveanticlock');
+        text1.setAttribute('visible','false');
+        document.querySelector('#spark1').emit('stopspark1');
+        document.querySelector('#spark2').emit('stopspark2');
+        document.querySelector('#spark3').emit('stopspark3');
+          document.querySelector('#spark4').emit('stopspark4');
+        document.querySelector('#spark5').emit('stopspark5');
+        document.querySelector('#spark6').emit('stopspark6');
+        document.querySelector('#spark7').emit('stopspark7');
+        document.querySelector('#spark8').emit('stopspark8');
+        document.querySelector('#spark9').emit('stopspark9');
+         spark8.setAttribute('visible','false');
+         spark9.setAttribute('visible','false');
+         spark7.setAttribute('visible','false');
+         spark6.setAttribute('visible','false');
+         spark5.setAttribute('visible','false');
+         spark4.setAttribute('visible','false');
+         spark3.setAttribute('visible','false');
+         spark2.setAttribute('visible','false');
+         spark1.setAttribute('visible','false');
+          riselava.setAttribute('visible','false');
+        document.querySelector('#newland').emit('newlandmove');
+        document.querySelector('#button3').emit('starthome');
+      }
+
+    });
+  }
+
+
+
+/*INT2&3 HEREEEE*/
+
+/*HOME BUTTON for Int2&3*/
+
+  button4.addEventListener("mouseenter", function () {
+    document.querySelector('#button4').emit('stophome1');
+    button4.setAttribute('material','color', 'black');
+  });
+
+  button4.addEventListener("mouseleave", function () {
+     document.querySelector('#button4').emit('starthome1');
+    button4.setAttribute('material','color', 'white');
+  });
+
+    button4.addEventListener("click", function () {
+    scene1.setAttribute('visible', 'false');
+    scene2.setAttribute('visible', 'false');
+    landing.setAttribute('visible', 'true');
+  });
+
+
+/* MOUSE ENTER*/
+  rightarrow.addEventListener("mouseenter", function() {
+  if(scaleclick<9) {
+    rightarrowimg.setAttribute('material','color', 'black');
+    text2.setAttribute('visible','true');
+    document.querySelector('#rightarrow').emit('stopright');
+    document.querySelector('#rightarrow').emit('startright');
+    document.querySelector('#rightarrow').emit('stopright2');
+  }
+  if(scaleclick === 9 || scaleclick === 10 || scaleclick === 11 || scaleclick === 12) {
+    document.querySelector('#leftarrow').emit('stopleft1');
+    document.querySelector('#rightarrow').emit('stopright1');
+    document.querySelector('#rightarrow').emit('startright3');
+    document.querySelector('#leftarrow').emit('startleft3');
+    text2.setAttribute('visible','false');}
+  });
+
+/* MOUSE ENTER*/
+  leftarrow.addEventListener("mouseenter", function () {
+    if(scaleclick<9) {
+      leftarrowimg.setAttribute('material','color', 'black');
+      text2.setAttribute('visible','true');
+      document.querySelector('#leftarrow').emit('stopleft');
+      document.querySelector('#leftarrow').emit('startleft');
+      document.querySelector('#leftarrow').emit('stopleft2');
+      text2.setAttribute('visible','true');
+    }
+    if(scaleclick === 9 || scaleclick === 10 || scaleclick === 11 || scaleclick === 12){
+      document.querySelector('#leftarrow').emit('stopleft1');
+      document.querySelector('#rightarrow').emit('stopright1');
+      document.querySelector('#rightarrow').emit('startright3');
+      document.querySelector('#leftarrow').emit('startleft3');
+      text2.setAttribute('visible','false');
+    }
+  });
+
+  rightarrow.addEventListener("mouseleave", function () {
+    if(scaleclick<9) {
+      rightarrowimg.setAttribute('material','color', 'white');
+      text2.setAttribute('visible','false');
+      fold.setAttribute('material','color', '#00407f');
+      document.querySelector('#rightarrow').emit('startright2');
+      document.querySelector('#rightarrow').emit('stopright1');
+    }
+    if(scaleclick === 9 || scaleclick === 10 || scaleclick === 11 || scaleclick === 12) {
+      document.querySelector('#leftarrow').emit('stopleft1');
+      document.querySelector('#rightarrow').emit('stopright1');
+      document.querySelector('#rightarrow').emit('startright3');
+      document.querySelector('#leftarrow').emit('startleft3');
+      text2.setAttribute('visible','false');
+    }
+  });
+
+  leftarrow.addEventListener("mouseleave", function () {
+    if(scaleclick<9) {
+      leftarrowimg.setAttribute('material','color', 'white');
+      text2.setAttribute('visible','false');
+      document.querySelector('#leftarrow').emit('startleft2');
+      document.querySelector('#leftarrow').emit('stopleft1');
+      text2.setAttribute('visible','false');
+     }
+     if(scaleclick === 9 || scaleclick === 10 || scaleclick === 11 || scaleclick === 12) {
+      document.querySelector('#leftarrow').emit('stopleft1');
+      document.querySelector('#rightarrow').emit('stopright1');
+      document.querySelector('#rightarrow').emit('startright3');
+      document.querySelector('#leftarrow').emit('startleft3');
+      text2.setAttribute('visible','false');
+     }
+  });
+
+ /*Making plates clickable*/
+   plane12.addEventListener("mouseenter", function() {
+    if(scaleclick<9) {
+      rightarrowimg.setAttribute('material','color', 'black');
+      text2.setAttribute('visible','true');
+      document.querySelector('#rightarrow').emit('stopright');
+      document.querySelector('#rightarrow').emit('startright');
+      document.querySelector('#rightarrow').emit('stopright2');
+    }
+    if(scaleclick === 9 || scaleclick === 10 || scaleclick === 11 || scaleclick === 12) {
+      document.querySelector('#leftarrow').emit('stopleft1');
+      document.querySelector('#rightarrow').emit('stopright1');
+      document.querySelector('#rightarrow').emit('startright3');
+      document.querySelector('#leftarrow').emit('startleft3');
+      text2.setAttribute('visible','false');}
+  });
+
+
+  plane13.addEventListener("mouseenter", function () {
+    if(scaleclick<9) {
+      leftarrowimg.setAttribute('material','color', 'black');
+      text2.setAttribute('visible','true');
+      document.querySelector('#leftarrow').emit('stopleft');
+      document.querySelector('#leftarrow').emit('startleft');
+      document.querySelector('#leftarrow').emit('stopleft2'); 
+      text2.setAttribute('visible','true');
+    }
+    if(scaleclick === 9 || scaleclick === 10 || scaleclick === 11 || scaleclick === 12){
+      document.querySelector('#leftarrow').emit('stopleft1');
+      document.querySelector('#rightarrow').emit('stopright1');
+      document.querySelector('#rightarrow').emit('startright3');
+      document.querySelector('#leftarrow').emit('startleft3');
+      text2.setAttribute('visible','false');
+    }
+  });
+  
+  plane12.addEventListener("mouseleave", function () {
+    if(scaleclick<9) {
+      rightarrowimg.setAttribute('material','color', 'white');
+      text2.setAttribute('visible','false');
+      fold.setAttribute('material','color', '#00407f');
+      document.querySelector('#rightarrow').emit('startright2');
+      document.querySelector('#rightarrow').emit('stopright1');
+    }
+    if(scaleclick === 9 || scaleclick === 10 || scaleclick === 11 || scaleclick === 12) {
+      document.querySelector('#leftarrow').emit('stopleft1');
+      document.querySelector('#rightarrow').emit('stopright1');
+      document.querySelector('#rightarrow').emit('startright3');
+      document.querySelector('#leftarrow').emit('startleft3');
+      text2.setAttribute('visible','false');
+    }
+  });
+
+  plane13.addEventListener("mouseleave", function () {
+    if(scaleclick<9) {
+      leftarrowimg.setAttribute('material','color', 'white');
+      text2.setAttribute('visible','false');
+      document.querySelector('#leftarrow').emit('startleft2');
+      document.querySelector('#leftarrow').emit('stopleft1');
+      text2.setAttribute('visible','false');
+     }
+     if(scaleclick === 9 || scaleclick === 10 || scaleclick === 11 || scaleclick === 12) {
+      document.querySelector('#leftarrow').emit('stopleft1');
+      document.querySelector('#rightarrow').emit('stopright1');
+      document.querySelector('#rightarrow').emit('startright3');
+      document.querySelector('#leftarrow').emit('startleft3');
+      text2.setAttribute('visible','false');
+     }
+  });
+
+  plane12.addEventListener("click", function() {
+    console.log("plane12 x position is " + plane12.object3D.position.x + ", plane12 y position is " + plane12.object3D.position.y);
+    
+    /*rightclick +=0.1;
+    p= rightclick+leftclick;
+    a +=1;
+    if(p <= 5.5) {
+      plane12.object3D.position.x -= 0.1;
+      rightarrow.object3D.position.x -= 0.1;
+    } 
+    if (p>5.5) {
+      while (a>0) {
+        fold.object3D.position.x -= 0.1;
+        a = a-1;
+      }
+      a = -20; */
+
+/*TESTING MY METHOD*/
+     a += 1;
+
+    if(plane12.object3D.position.x > 10.9) {
+      plane12.object3D.position.x -= 0.3;
+      rightarrow.object3D.position.x -= 0.3;
+    }
+
+    if (plane13.object3D.position.x >= -11.3 && plane12.object3D.position.x <= 10.9){
+        while (a>0) {
+          fold.object3D.position.x -= 0.1;
+          a = a-1;
+        }
+        a = -10;
+/*END TESTING MY METHOD*/
+
+      fold.setAttribute('visible', 'true');
+
+      if(scaleclick >= 9){
+        //document.querySelector('#spark').emit('sparkappear');
+        document.querySelector('#leftarrow').emit('stopleft');
+        document.querySelector('#rightarrow').emit('stopright');
+        document.querySelector('#leftarrow').emit('stopleft2'); 
+        document.querySelector('#leftarrow').emit('stopleft1'); 
+        document.querySelector('#rightarrow').emit('stopright1');
+        document.querySelector('#rightarrow').emit('stopright2');
+        document.querySelector('#mountain1').emit('mountain1move');
+        document.querySelector('#mountain2').emit('mountain2move');
+        document.querySelector('#mountain3').emit('mountain3move');
+        document.querySelector('#rightarrow').emit('startright3');
+        document.querySelector('#leftarrow').emit('startleft3');
+        plane12.setAttribute('material','color', '#00407f');
+        plane13.setAttribute('material','color','#0080ff');
+        fold.setAttribute('material','color', '#00407f');
+      }
+        
+      mountain1.addEventListener("animationend", function() {
+        document.querySelector('#spark10').emit('stopspark10');
+        document.querySelector('#spark12').emit('stopspark12');
+        document.querySelector('#spark13').emit('stopspark13');
+        document.querySelector('#spark14').emit('stopspark14');
+        document.querySelector('#spark15').emit('stopspark15');
+        document.querySelector('#spark16').emit('stopspark16');
+        document.querySelector('#spark17').emit('stopspark17');
+        document.querySelector('#spark18').emit('stopspark18');
+        document.querySelector('#spark11').emit('stopspark11');
+        spark18.setAttribute('visible','false');
+        spark11.setAttribute('visible','false');
+        spark17.setAttribute('visible','false');
+        spark16.setAttribute('visible','false');
+        spark15.setAttribute('visible','false');
+        spark14.setAttribute('visible','false');
+        spark13.setAttribute('visible','false');
+        spark12.setAttribute('visible','false');
+        spark10.setAttribute('visible','false');
+        document.querySelector('#button4').emit('starthome1');
+      });
+
+      if(scaleclick<9){
+        fold.object3D.scale.x += 0.8;
+        scaleclick +=1; 
+        fold.object3D.position.y -=0.15;
+        fold.object3D.position.x -=0.19;
+        /*plane12.object3D.scale.x -= 0.02;
+        plane12.object3D.position.x -= 0.235;*/
+        //rightarrow.object3D.position.x -= 0.235;
+      }
+        
+      if (scaleclick ===1){
+      spark10.setAttribute('visible','true');
+      document.querySelector('#spark10').emit('startspark10');}
+      
+      if (scaleclick ===2){
+      spark11.setAttribute('visible','true');
+      document.querySelector('#spark11').emit('startspark11');}
+      
+      if (scaleclick ===3){
+      spark12.setAttribute('visible','true');
+      document.querySelector('#spark12').emit('startspark12');}
+      
+      if (scaleclick ===4){
+      spark13.setAttribute('visible','true');
+      document.querySelector('#spark13').emit('startspark13');}
+    }
+      
+    if (scaleclick ===5){
+      spark14.setAttribute('visible','true');
+      document.querySelector('#spark14').emit('startspark14');}
+    
+    if (scaleclick ===6){
+      spark15.setAttribute('visible','true');
+      document.querySelector('#spark15').emit('startspark15');}
+    
+    if (scaleclick ===7){
+      spark16.setAttribute('visible','true');
+      document.querySelector('#spark16').emit('startspark16');}
+    
+    if (scaleclick ===8){
+      spark17.setAttribute('visible','true');
+      document.querySelector('#spark17').emit('startspark17');
+    
+      spark18.setAttribute('visible','true');
+      document.querySelector('#spark18').emit('startspark18');}
+  });
+
+  plane13.addEventListener("click", function() {
+    console.log("plane13 x position is " + plane13.object3D.position.x + ", plane13 y position is " + plane13.object3D.position.y);
+    /*leftclick +=1;
+    p= rightclick+leftclick;
+    leftfar+=1; 
+
+    if (p<=5.5) {
+      plane13.object3D.position.x += 1; 
+      leftarrow.object3D.position.x += 1;
+    }
+
+    if (p>5.5){
+      if(leftfar == 6){
+        plane13.object3D.position.x += 0.5; 
+        leftarrow.object3D.position.x += 0.5;
+        leftfar= -20;
+      }
+
+      while (a>0) {
+        fold.object3D.position.x -= 0.1;
+        a = a-1;
+      }
+      a = -20; */
+
+/*TESTING MY METHOD*/
+      if(plane13.object3D.position.x < -11.3) {
+        plane13.object3D.position.x += 1;
+        leftarrow.object3D.position.x += 1;
+      }
+
+      if (plane13.object3D.position.x >= -11.3 && plane12.object3D.position.x <= 10.9){
+        while (a>0) {
+          fold.object3D.position.x -= 0.1;
+          a = a-1;
+        }
+        a = -10;
+/*END TESTING MY METHOD*/
+
+      fold.setAttribute("visible", 'true');
+
+      if(scaleclick<9){
+        fold.object3D.scale.x += 0.8;
+        scaleclick +=1; 
+        fold.object3D.position.y -=0.13;
+        fold.object3D.position.x -=0.1;
+        plane12.object3D.scale.x -= 0.003;
+        plane12.object3D.position.x+= 0.1; 
+        plane13.object3D.position.x += 0.1;
+        //leftarrow.object3D.position.x += 0.1;
+      }
+
+      if(scaleclick >= 9){
+        //document.querySelector('#spark').emit('sparkappear');
+        document.querySelector('#leftarrow').emit('stopleft');
+        document.querySelector('#rightarrow').emit('stopright');
+        document.querySelector('#leftarrow').emit('stopleft2'); 
+        document.querySelector('#leftarrow').emit('stopleft1'); 
+        document.querySelector('#rightarrow').emit('stopright1');
+        document.querySelector('#rightarrow').emit('stopright2');
+        document.querySelector('#rightarrow').emit('startright3');
+        document.querySelector('#leftarrow').emit('startleft3');
+        document.querySelector('#mountain1').emit('mountain1move');
+        document.querySelector('#mountain2').emit('mountain2move');
+        document.querySelector('#mountain3').emit('mountain3move');
+        plane12.setAttribute('material','color', '#00407f');
+        plane13.setAttribute('material','color','#0080ff');
+        fold.setAttribute('material','color', '#00407f');
+      }
+      
+      mountain1.addEventListener("animationend", function() {
+        document.querySelector('#spark10').emit('stopspark10');
+        document.querySelector('#spark12').emit('stopspark12');
+        document.querySelector('#spark13').emit('stopspark13');
+        document.querySelector('#spark14').emit('stopspark14');
+        document.querySelector('#spark15').emit('stopspark15');
+        document.querySelector('#spark16').emit('stopspark16');
+        document.querySelector('#spark17').emit('stopspark17');
+        document.querySelector('#spark18').emit('stopspark18');
+        document.querySelector('#spark11').emit('stopspark11');
+        spark18.setAttribute('visible','false');
+        spark11.setAttribute('visible','false');
+        spark17.setAttribute('visible','false');
+        spark16.setAttribute('visible','false');
+        spark15.setAttribute('visible','false');
+        spark14.setAttribute('visible','false');
+        spark13.setAttribute('visible','false')
+        spark12.setAttribute('visible','false');
+        spark10.setAttribute('visible','false');
+        document.querySelector('#button4').emit('starthome1');
+      });
+      
+      if (scaleclick ===1){
+      spark10.setAttribute('visible','true');
+      document.querySelector('#spark10').emit('startspark10');}
+      
+      if (scaleclick ===2){
+      spark11.setAttribute('visible','true');
+      document.querySelector('#spark11').emit('startspark11');}
+      
+      if (scaleclick ===3){
+      spark12.setAttribute('visible','true');
+      document.querySelector('#spark12').emit('startspark12');}
+      
+      if (scaleclick ===4){
+      spark13.setAttribute('visible','true');
+      document.querySelector('#spark13').emit('startspark13');}
+    
+    if (scaleclick ===5){
+      spark14.setAttribute('visible','true');
+      document.querySelector('#spark14').emit('startspark14');}
+    
+    if (scaleclick ===6){
+      spark15.setAttribute('visible','true');
+      document.querySelector('#spark15').emit('startspark15');}
+    
+    if (scaleclick ===7){
+      spark16.setAttribute('visible','true');
+      document.querySelector('#spark16').emit('startspark16');}
+    
+    if (scaleclick ===8){
+      spark17.setAttribute('visible','true');
+      document.querySelector('#spark17').emit('startspark17');
+    
+      spark18.setAttribute('visible','true');
+      document.querySelector('#spark18').emit('startspark18');}
+    }
+  });   
+
+/*Plates clickable end*/
+
+
+  rightarrow.addEventListener("click", function() {
+    /*rightclick +=0.1;
+    p= rightclick+leftclick;
+    a +=1;
+    if(p <= 5.5) {
+      plane12.object3D.position.x -= 0.1;
+      rightarrow.object3D.position.x -= 0.1;
+    }
+    if (p>5.5) {
+      while (a>0) {
+        fold.object3D.position.x -= 0.1;
+        a = a-1;
+      }
+      a = -20;
+    */
+
+    a += 1;
+
+    if(plane12.object3D.position.x > 10.9) {
+      plane12.object3D.position.x -= 0.1;
+      rightarrow.object3D.position.x -= 0.1;
+    }
+
+    if (plane13.object3D.position.x >= -11.3 && plane12.object3D.position.x <= 10.9){
+        while (a>0) {
+          fold.object3D.position.x -= 0.1;
+          a = a-1;
+        }
+        a = -10;
+
+      fold.setAttribute("visible", 'true');
+
+      if(scaleclick >= 9){
+        //document.querySelector('#spark').emit('sparkappear');
+        document.querySelector('#leftarrow').emit('stopleft');
+        document.querySelector('#rightarrow').emit('stopright');
+        document.querySelector('#leftarrow').emit('stopleft2');
+        document.querySelector('#leftarrow').emit('stopleft1');
+        document.querySelector('#rightarrow').emit('stopright1');
+        document.querySelector('#rightarrow').emit('stopright2');
+        document.querySelector('#mountain1').emit('mountain1move');
+        document.querySelector('#mountain2').emit('mountain2move');
+        document.querySelector('#mountain3').emit('mountain3move');
+        document.querySelector('#rightarrow').emit('startright3');
+        document.querySelector('#leftarrow').emit('startleft3');
+        plane12.setAttribute('material','color', '#00407f');
+        plane13.setAttribute('material','color','#0080ff');
+        fold.setAttribute('material','color', '#00407f');
+      }
+
+      mountain1.addEventListener("animationend", function() {
+        document.querySelector('#spark10').emit('stopspark10');
+        document.querySelector('#spark12').emit('stopspark12');
+        document.querySelector('#spark13').emit('stopspark13');
+        document.querySelector('#spark14').emit('stopspark14');
+        document.querySelector('#spark15').emit('stopspark15');
+        document.querySelector('#spark16').emit('stopspark16');
+        document.querySelector('#spark17').emit('stopspark17');
+        document.querySelector('#spark18').emit('stopspark18');
+        document.querySelector('#spark11').emit('stopspark11');
+        spark18.setAttribute('visible','false');
+        spark11.setAttribute('visible','false');
+        spark17.setAttribute('visible','false');
+        spark16.setAttribute('visible','false');
+        spark15.setAttribute('visible','false');
+        spark14.setAttribute('visible','false');
+        spark13.setAttribute('visible','false');
+        spark12.setAttribute('visible','false');
+        spark10.setAttribute('visible','false');
+        document.querySelector('#button4').emit('starthome1');});
+
+      if(scaleclick<9){
+        fold.object3D.scale.x += 0.8;
+        scaleclick +=1;
+        fold.object3D.position.y -=0.15;
+        fold.object3D.position.x -=0.19;
+        plane12.object3D.scale.x -= 0.02;
+        plane12.object3D.position.x -= 0.235;
+        rightarrow.object3D.position.x -= 0.235;
+      }
+
+      if (scaleclick ===1){
+      spark10.setAttribute('visible','true');
+      document.querySelector('#spark10').emit('startspark10');}
+
+      if (scaleclick ===2){
+      spark11.setAttribute('visible','true');
+      document.querySelector('#spark11').emit('startspark11');}
+
+      if (scaleclick ===3){
+      spark12.setAttribute('visible','true');
+      document.querySelector('#spark12').emit('startspark12');}
+
+      if (scaleclick ===4){
+      spark13.setAttribute('visible','true');
+      document.querySelector('#spark13').emit('startspark13');}
+    }
+
+    if (scaleclick ===5){
+      spark14.setAttribute('visible','true');
+      document.querySelector('#spark14').emit('startspark14');}
+
+    if (scaleclick ===6){
+      spark15.setAttribute('visible','true');
+      document.querySelector('#spark15').emit('startspark15');}
+
+    if (scaleclick ===7){
+      spark16.setAttribute('visible','true');
+      document.querySelector('#spark16').emit('startspark16');}
+
+    if (scaleclick ===8){
+      spark17.setAttribute('visible','true');
+      document.querySelector('#spark17').emit('startspark17');
+
+      spark18.setAttribute('visible','true');
+      document.querySelector('#spark18').emit('startspark18');}
+  });
+
+  leftarrow.addEventListener("click", function() {
+    /*leftclick +=1;
+    p= rightclick+leftclick;
+    leftfar+=1;
+
+    if (p<=5.5) {
+      plane13.object3D.position.x += 1;
+      leftarrow.object3D.position.x += 1; 
+    }
+
+    if (p>5.5){
+      if(leftfar == 6){
+        plane13.object3D.position.x += 0.5;
+        leftarrow.object3D.position.x += 0.5; 
+        leftfar= -20;
+      }
+
+      while (a>0) {
+        fold.object3D.position.x -= 0.1;
+        a = a-1;
+      }
+      a = -20;
+*/
+
+    if (plane13.object3D.position.x < -11.3) {
+      plane13.object3D.position.x += 1;
+      leftarrow.object3D.position.x += 1; 
+    }
+
+    if (plane13.object3D.position.x >= -11.3 && plane12.object3D.position.x <= 10.9){
+      while (a>0) {
+        fold.object3D.position.x -= 0.1;
+        a = a-1;
+      }
+      a = -10;
+
+      fold.setAttribute("visible", 'true');
+
+      if(scaleclick<9){
+        fold.object3D.scale.x += 0.8;
+        scaleclick +=1;
+        fold.object3D.position.y -=0.13;
+        fold.object3D.position.x -=0.1;
+        plane12.object3D.scale.x -= 0.003;
+        plane12.object3D.position.x+= 0.1;
+        plane13.object3D.position.x += 0.1;
+      /*  leftarrow.object3D.position.x += 0.1; */
+      }
+
+      if(scaleclick >= 9){
+        //document.querySelector('#spark').emit('sparkappear');
+        document.querySelector('#leftarrow').emit('stopleft');
+        document.querySelector('#rightarrow').emit('stopright');
+        document.querySelector('#leftarrow').emit('stopleft2');
+        document.querySelector('#leftarrow').emit('stopleft1');
+        document.querySelector('#rightarrow').emit('stopright1');
+        document.querySelector('#rightarrow').emit('stopright2');
+        document.querySelector('#rightarrow').emit('startright3');
+        document.querySelector('#leftarrow').emit('startleft3');
+        document.querySelector('#mountain1').emit('mountain1move');
+        document.querySelector('#mountain2').emit('mountain2move');
+        document.querySelector('#mountain3').emit('mountain3move');
+        plane12.setAttribute('material','color', '#00407f');
+        plane13.setAttribute('material','color','#0080ff');
+        fold.setAttribute('material','color', '#00407f');
+      }
+
+      mountain1.addEventListener("animationend", function() {
+        document.querySelector('#spark10').emit('stopspark10');
+      document.querySelector('#spark12').emit('stopspark12');
+      document.querySelector('#spark13').emit('stopspark13');
+        document.querySelector('#spark14').emit('stopspark14');
+      document.querySelector('#spark15').emit('stopspark15');
+      document.querySelector('#spark16').emit('stopspark16');
+      document.querySelector('#spark17').emit('stopspark17');
+      document.querySelector('#spark18').emit('stopspark18');
+      document.querySelector('#spark11').emit('stopspark11');
+       spark18.setAttribute('visible','false');
+       spark11.setAttribute('visible','false');
+       spark17.setAttribute('visible','false');
+       spark16.setAttribute('visible','false');
+       spark15.setAttribute('visible','false');
+       spark14.setAttribute('visible','false');
+       spark13.setAttribute('visible','false');
+       spark12.setAttribute('visible','false');
+       spark10.setAttribute('visible','false');
+       document.querySelector('#button4').emit('starthome1');});
+
+      if (scaleclick ===1){
+      spark10.setAttribute('visible','true');
+      document.querySelector('#spark10').emit('startspark10');}
+
+      if (scaleclick ===2){
+      spark11.setAttribute('visible','true');
+      document.querySelector('#spark11').emit('startspark11');}
+
+      if (scaleclick ===3){
+      spark12.setAttribute('visible','true');
+      document.querySelector('#spark12').emit('startspark12');}
+
+      if (scaleclick ===4){
+      spark13.setAttribute('visible','true');
+      document.querySelector('#spark13').emit('startspark13');}
+
+    if (scaleclick ===5){
+      spark14.setAttribute('visible','true');
+      document.querySelector('#spark14').emit('startspark14');}
+
+    if (scaleclick ===6){
+      spark15.setAttribute('visible','true');
+      document.querySelector('#spark15').emit('startspark15');}
+
+    if (scaleclick ===7){
+      spark16.setAttribute('visible','true');
+      document.querySelector('#spark16').emit('startspark16');}
+
+    if (scaleclick ===8){
+      spark17.setAttribute('visible','true');
+      document.querySelector('#spark17').emit('startspark17');
+
+      spark18.setAttribute('visible','true');
+      document.querySelector('#spark18').emit('startspark18');}
+    }
+  });
+
+  </script>
+
+</body>
+</html>
